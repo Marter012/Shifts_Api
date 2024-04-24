@@ -7,6 +7,13 @@ export const getShiftsControllers = async (req: Request, res: Response) => {
     const { category }: IShifts = req.body;
 
     const shifts = await Shifts.find({ category }).exec();
+
+    if (!shifts) {
+      res.status(404).json({
+        msg: "No se encontraron turnos en la base de datos.",
+      });
+      return;
+    }
     res.status(200).json({
       shifts,
     });
