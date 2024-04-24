@@ -4,7 +4,9 @@ import Shifts, { IShifts } from "../models/shifts";
 
 export const getShiftsControllers = async (req: Request, res: Response) => {
   try {
-    const shifts = await Shifts.find({ category: "shifts" }).exec();
+    const { category }: IShifts = req.body;
+
+    const shifts = await Shifts.find({ category }).exec();
     res.status(200).json({
       shifts,
     });
