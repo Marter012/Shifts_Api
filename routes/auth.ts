@@ -16,6 +16,7 @@ router.get(
   ],
   getShiftsControllers
 );
+
 router.post(
   "/addShifts",
   [

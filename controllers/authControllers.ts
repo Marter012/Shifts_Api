@@ -3,8 +3,8 @@ import randomstring from "randomstring";
 import Shifts, { IShifts } from "../models/shifts";
 
 export const getShiftsControllers = async (req: Request, res: Response) => {
+  const { category }: IShifts = req.body;
   try {
-    const { category }: IShifts = req.body;
 
     const shifts = await Shifts.find({ category }).exec();
 
