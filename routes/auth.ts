@@ -8,12 +8,12 @@ import { check } from "express-validator";
 import { collectErrors } from "../middlewares/collectErrors";
 
 const router = Router();
-() => {
-  console.log("hola");
-};
 router.get(
   "/getShifts",
-  [check("category", "Error al recibir categoria.").not().isEmpty()],
+  [
+    check("category", "Error al recibir categoria.").not().isEmpty(),
+    collectErrors,
+  ],
   getShiftsControllers
 );
 router.post(
