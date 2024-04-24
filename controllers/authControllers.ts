@@ -3,11 +3,16 @@ import randomstring from "randomstring";
 import Shifts, { IShifts } from "../models/shifts";
 
 export const getShiftsControllers = async (req: Request, res: Response) => {
-  const shifts = await Shifts.find({ category: "shifts" }).exec();
-  console.log(shifts);
-  res.status(200).json({
-    shifts,
-  });
+  try {
+    const shifts = await Shifts.find({ category: "shifts" }).exec();
+    res.status(200).json({
+      shifts,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Error en el servidor.",
+    });
+  }
 };
 
 export const addShiftsControllers = async (req: Request, res: Response) => {
