@@ -10,10 +10,6 @@ import { collectErrors } from "../middlewares/collectErrors";
 const router = Router();
 router.get(
   "/getShifts",
-  [
-    check("category", "Error al recibir categoria.").not().isEmpty(),
-    collectErrors,
-  ],
   getShiftsControllers
 );
 
