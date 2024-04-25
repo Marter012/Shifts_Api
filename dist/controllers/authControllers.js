@@ -16,11 +16,27 @@ exports.cancelShiftsControllers = exports.addShiftsControllers = exports.getShif
 const randomstring_1 = __importDefault(require("randomstring"));
 const shifts_1 = __importDefault(require("../models/shifts"));
 const getShiftsControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const shifts = yield shifts_1.default.find({ category: "shifts" }).exec();
-    console.log(shifts);
-    res.status(200).json({
-        shifts,
-    });
+    const { category } = req.body;
+    console.log(category);
+    try {
+        const shifts = yield shifts_1.default.find({ category }).exec();
+        console.log(shifts);
+        if (shifts.length === 0) {
+            console.log(shifts.length);
+            res.status(404).json({
+                msg: "No se encontraron turnos en la base de datos.",
+            });
+            return;
+        }
+        res.status(200).json({
+            shifts,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "Error en el servidor.",
+        });
+    }
 });
 exports.getShiftsControllers = getShiftsControllers;
 const addShiftsControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

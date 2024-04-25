@@ -24,6 +24,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log("BD - SHIFTS ONLINE");
     }
     catch (error) {
+        console.log(error);
         throw new Error("Error al a hora de iniciar la base de datos.");
     }
 });
