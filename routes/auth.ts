@@ -8,8 +8,14 @@ import { check } from "express-validator";
 import { collectErrors } from "../middlewares/collectErrors";
 
 const router = Router();
-router.get(
+router.post(
   "/getShifts",
+  [
+    check("category", "Error al recibir categoria.").not().isEmpty(),
+    check("date", "La fecha es obligatoria.").not().isEmpty(),
+    check("state", "La fecha es obligatoria.").not().isEmpty(),
+    collectErrors,
+  ],
   getShiftsControllers
 );
 

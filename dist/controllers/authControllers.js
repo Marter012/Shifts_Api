@@ -17,12 +17,9 @@ const randomstring_1 = __importDefault(require("randomstring"));
 const shifts_1 = __importDefault(require("../models/shifts"));
 const getShiftsControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { category } = req.body;
-    console.log(category);
     try {
         const shifts = yield shifts_1.default.find({ category }).exec();
-        console.log(shifts);
         if (shifts.length === 0) {
-            console.log(shifts.length);
             res.status(404).json({
                 msg: "No se encontraron turnos en la base de datos.",
             });

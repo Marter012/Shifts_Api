@@ -5,9 +5,10 @@ const express_validator_1 = require("express-validator");
 const collectErrors = (req, res, next) => {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
-        console.log("hola", errors);
+        console.log(errors);
         res.status(400).json({
             errors,
+            mau: "hola"
         });
     }
     else {

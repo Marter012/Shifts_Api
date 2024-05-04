@@ -5,8 +5,10 @@ const authControllers_1 = require("../controllers/authControllers");
 const express_validator_1 = require("express-validator");
 const collectErrors_1 = require("../middlewares/collectErrors");
 const router = (0, express_1.Router)();
-router.get("/getShifts", [
+router.post("/getShifts", [
     (0, express_validator_1.check)("category", "Error al recibir categoria.").not().isEmpty(),
+    (0, express_validator_1.check)("date", "La fecha es obligatoria.").not().isEmpty(),
+    (0, express_validator_1.check)("state", "La fecha es obligatoria.").not().isEmpty(),
     collectErrors_1.collectErrors,
 ], authControllers_1.getShiftsControllers);
 router.post("/addShifts", [
