@@ -12,8 +12,6 @@ router.post(
   "/getShifts",
   [
     check("category", "Error al recibir categoria.").not().isEmpty(),
-    check("date", "La fecha es obligatoria.").not().isEmpty(),
-    check("state", "La fecha es obligatoria.").not().isEmpty(),
     collectErrors,
   ],
   getShiftsControllers
