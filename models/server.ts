@@ -1,17 +1,19 @@
 import express, { Express } from "express";
-import authRouter from "../routes/auth";
+import authRouterShifts from "../routes/authShifts";
 import cors from "cors";
 import { connectDB } from "../dataBase/DBConfig";
 
 export class Server {
   app: Express;
   port: string | number | undefined;
-  authPath: string;
+  authPathShifts: string;
+  authPathActivities: string;
 
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-    this.authPath = "/auth";
+    this.authPathShifts = "/authShifts";
+    this.authPathActivities = "/authActivities";
 
     this.connectionBD();
     this.middlewares();
@@ -28,7 +30,8 @@ export class Server {
   }
 
   routes(): void {
-    this.app.use(this.authPath, authRouter);
+    this.app.use(this.authPathShifts, authRouterShifts);
+    this.app.use(this.authPathActivities, );
   }
 
   listen(): void {
