@@ -11,52 +11,41 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShiftsSchema = void 0;
+exports.ActivitiesSchema = void 0;
 const mongoose_1 = require("mongoose");
-exports.ShiftsSchema = new mongoose_1.Schema({
+exports.ActivitiesSchema = new mongoose_1.Schema({
     category: {
         type: String,
         required: true,
     },
-    date: {
-        type: String,
-        required: true,
-    },
-    schedule: {
-        type: String,
+    code: {
+        type: Number,
         required: true,
     },
     name: {
         type: String,
         required: true,
     },
-    price: {
+    cost: {
         type: Number,
         required: true,
     },
-    location: {
-        type: String,
-        required: true,
-    },
-    phone: {
+    finalPrice: {
         type: Number,
         required: true,
     },
-    activity: {
-        type: String,
+    netIncome: {
+        type: Number,
         required: true,
-    },
-    code: {
-        type: String,
     },
     state: {
         type: Boolean,
         default: true,
     },
 });
-exports.ShiftsSchema.methods.toJSON = function () {
-    const _a = this.toObject(), { __v, _id } = _a, shifts = __rest(_a, ["__v", "_id"]);
-    return shifts;
+exports.ActivitiesSchema.methods.toJSON = function () {
+    const _a = this.toObject(), { __v, _id } = _a, activities = __rest(_a, ["__v", "_id"]);
+    return activities;
 };
-const Shifts = (0, mongoose_1.model)("Shifts", exports.ShiftsSchema);
-exports.default = Shifts;
+const Activities = (0, mongoose_1.model)("Shiflts", exports.ActivitiesSchema);
+exports.default = Activities;

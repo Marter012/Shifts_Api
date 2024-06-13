@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import authRouterShifts from "../routes/authShifts";
+import authRouterActivities from "../routes/authActivities";
 import cors from "cors";
 import { connectDB } from "../dataBase/DBConfig";
 
@@ -31,7 +32,7 @@ export class Server {
 
   routes(): void {
     this.app.use(this.authPathShifts, authRouterShifts);
-    this.app.use(this.authPathActivities, );
+    this.app.use(this.authPathActivities, authRouterActivities);
   }
 
   listen(): void {

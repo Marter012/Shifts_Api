@@ -14,14 +14,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
-const auth_1 = __importDefault(require("../routes/auth"));
+const authShifts_1 = __importDefault(require("../routes/authShifts"));
+const authActivities_1 = __importDefault(require("../routes/authActivities"));
 const cors_1 = __importDefault(require("cors"));
 const DBConfig_1 = require("../dataBase/DBConfig");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT;
-        this.authPath = "/auth";
+        this.authPathShifts = "/authShifts";
+        this.authPathActivities = "/authActivities";
         this.connectionBD();
         this.middlewares();
         this.routes();
@@ -36,7 +38,8 @@ class Server {
         this.app.use((0, cors_1.default)());
     }
     routes() {
-        this.app.use(this.authPath, auth_1.default);
+        this.app.use(this.authPathShifts, authShifts_1.default);
+        this.app.use(this.authPathActivities, authActivities_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {
