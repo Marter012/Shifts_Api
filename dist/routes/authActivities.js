@@ -11,7 +11,6 @@ router.post("/getActivities", [
 ], authActivitiesControllers_1.getActivitiesControllers);
 router.post("/addActivity", [
     (0, express_validator_1.check)("category", "Error al recibir categoria.").not().isEmpty(),
-    (0, express_validator_1.check)("code", "El codigo es obligatorio.").not().isEmpty(),
     (0, express_validator_1.check)("name", "El nombre es obligatorio.").not().isEmpty(),
     (0, express_validator_1.check)("cost", "El costo es obligatorio.").not().isEmpty(),
     (0, express_validator_1.check)("finalPrice", "El precio final es obligatorio.").not().isEmpty(),

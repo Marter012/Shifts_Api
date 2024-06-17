@@ -17,7 +17,7 @@ export const ActivitiesSchema = new Schema<IActivities>({
   },
   code: {
     type: Number,
-    required: true,
+    required: false,
   },
   name: {
     type: String,

@@ -36,19 +36,28 @@ const getActivitiesControllers = (req, res) => __awaiter(void 0, void 0, void 0,
 });
 exports.getActivitiesControllers = getActivitiesControllers;
 const addActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { category, code, name, cost, finalPrice, netIncome } = req.body;
-    const activity = new activities_1.default({
-        category,
-        code,
-        name,
-        cost,
-        finalPrice,
-        netIncome,
-    });
-    yield activity.save();
-    res.status(201).json({
-        activity,
-    });
+    const { category, name, cost, finalPrice, netIncome } = req.body;
+    try {
+        const activity = new activities_1.default({
+            category,
+            code: 0,
+            name,
+            cost,
+            finalPrice,
+            netIncome,
+        });
+        const newCode = Math.floor(Math.random() * 999) + 101;
+        activity.cost = newCode;
+        yield activity.save();
+        res.status(201).json({
+            activity,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            msg: "Error en el servidor.",
+        });
+    }
 });
 exports.addActivityControllers = addActivityControllers;
 const cancelActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,7 +90,7 @@ const cancelActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0
 });
 exports.cancelActivityControllers = cancelActivityControllers;
 const updateActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { category, code, name, cost, finalPrice, netIncome } = req.body;
+    const { code, name, cost, finalPrice, netIncome } = req.body;
     try {
         const activity = yield activities_1.default.findOne({ code });
         if (!activity) {

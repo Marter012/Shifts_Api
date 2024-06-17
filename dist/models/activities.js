@@ -20,7 +20,7 @@ exports.ActivitiesSchema = new mongoose_1.Schema({
     },
     code: {
         type: Number,
-        required: true,
+        required: false,
     },
     name: {
         type: String,
@@ -47,5 +47,5 @@ exports.ActivitiesSchema.methods.toJSON = function () {
     const _a = this.toObject(), { __v, _id } = _a, activities = __rest(_a, ["__v", "_id"]);
     return activities;
 };
-const Activities = (0, mongoose_1.model)("Shiflts", exports.ActivitiesSchema);
+const Activities = (0, mongoose_1.model)("Activities", exports.ActivitiesSchema);
 exports.default = Activities;

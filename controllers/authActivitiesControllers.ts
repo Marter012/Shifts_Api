@@ -27,16 +27,18 @@ export const addActivityControllers = async (req: Request, res: Response) => {
   const { category, name, cost, finalPrice, netIncome }: IActivities = req.body;
 
   try {
-    const newCode = randomstring.generate(6);
-
     const activity = new Activities({
       category,
-      code: newCode,
+      code: 0,
       name,
       cost,
       finalPrice,
       netIncome,
     });
+
+    const newCode = Math.floor(Math.random() * 999) + 101;
+
+    activity.cost = newCode;
 
     await activity.save();
     res.status(201).json({
