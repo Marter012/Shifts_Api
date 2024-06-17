@@ -29,7 +29,6 @@ export const addActivityControllers = async (req: Request, res: Response) => {
   try {
     const activity = new Activities({
       category,
-      code,
       name,
       cost,
       finalPrice,
