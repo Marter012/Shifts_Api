@@ -48,7 +48,7 @@ ActivitiesSchema.methods.toJSON = function () {
 };
 
 const Activities: Model<IActivities> = model<IActivities>(
-  "Shiflts",
+  "Activities",
   ActivitiesSchema
 );
 

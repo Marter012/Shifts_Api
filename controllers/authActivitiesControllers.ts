@@ -79,7 +79,7 @@ export const updateActivityControllers = async (
   req: Request,
   res: Response
 ) => {
-  const { category, code, name, cost, finalPrice, netIncome }: IActivities =
+  const { code, name, cost, finalPrice, netIncome }: IActivities =
     req.body;
   try {
     const activity = await Activities.findOne({ code });
