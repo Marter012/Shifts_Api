@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import randomstring from "randomstring";
+
 import Activities, { IActivities } from "../models/activities";
 
 export const getActivitiesControllers = async (req: Request, res: Response) => {
@@ -25,9 +27,11 @@ export const addActivityControllers = async (req: Request, res: Response) => {
   const { category, code, name, cost, finalPrice, netIncome }: IActivities =
     req.body;
 
+  const newCode = randomstring.generate(6);
+
   const activity = new Activities({
     category,
-    code,
+    code: newCode,
     name,
     cost,
     finalPrice,
@@ -79,8 +83,7 @@ export const updateActivityControllers = async (
   req: Request,
   res: Response
 ) => {
-  const { code, name, cost, finalPrice, netIncome }: IActivities =
-    req.body;
+  const { code, name, cost, finalPrice, netIncome }: IActivities = req.body;
   try {
     const activity = await Activities.findOne({ code });
 
