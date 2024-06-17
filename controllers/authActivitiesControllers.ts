@@ -24,24 +24,29 @@ export const getActivitiesControllers = async (req: Request, res: Response) => {
 };
 
 export const addActivityControllers = async (req: Request, res: Response) => {
-  const { category, name, cost, finalPrice, netIncome }: IActivities =
-    req.body;
+  const { category, name, cost, finalPrice, netIncome }: IActivities = req.body;
 
-  const newCode = randomstring.generate(6);
+  try {
+    const newCode = randomstring.generate(6);
 
-  const activity = new Activities({
-    category,
-    code: newCode,
-    name,
-    cost,
-    finalPrice,
-    netIncome,
-  });
+    const activity = new Activities({
+      category,
+      code: newCode,
+      name,
+      cost,
+      finalPrice,
+      netIncome,
+    });
 
-  await activity.save();
-  res.status(201).json({
-    activity,
-  });
+    await activity.save();
+    res.status(201).json({
+      activity,
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "Error en el servidor.",
+    });
+  }
 };
 
 export const cancelActivityControllers = async (
