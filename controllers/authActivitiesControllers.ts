@@ -24,7 +24,7 @@ export const getActivitiesControllers = async (req: Request, res: Response) => {
 };
 
 export const addActivityControllers = async (req: Request, res: Response) => {
-  const { category, code, name, cost, finalPrice, netIncome }: IActivities =
+  const { category, name, cost, finalPrice, netIncome }: IActivities =
     req.body;
 
   const newCode = randomstring.generate(6);

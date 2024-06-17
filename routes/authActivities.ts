@@ -23,7 +23,6 @@ router.post(
   "/addActivity",
   [
     check("category", "Error al recibir categoria.").not().isEmpty(),
-    check("code", "El codigo es obligatorio.").not().isEmpty(),
     check("name", "El nombre es obligatorio.").not().isEmpty(),
     check("cost", "El costo es obligatorio.").not().isEmpty(),
     check("finalPrice", "El precio final es obligatorio.").not().isEmpty(),
