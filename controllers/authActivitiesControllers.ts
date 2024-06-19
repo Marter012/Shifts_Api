@@ -4,9 +4,8 @@ import randomstring from "randomstring";
 import Activities, { IActivities } from "../models/activities";
 
 export const getActivitiesControllers = async (req: Request, res: Response) => {
-  const { category }: IActivities = req.body;
   try {
-    const activities = await Activities.find({ category }).exec();
+    const activities = await Activities.find().exec();
     if (activities.length === 0) {
       res.status(404).json({
         msg: "No se encontraron actividades en la base de datos.",
@@ -24,20 +23,25 @@ export const getActivitiesControllers = async (req: Request, res: Response) => {
 };
 
 export const addActivityControllers = async (req: Request, res: Response) => {
-  const { category, name, cost, finalPrice, netIncome }: IActivities = req.body;
+  const { name, cost, finalPrice, netIncome }: IActivities = req.body;
 
   try {
     const activity = new Activities({
-      category,
       name,
       cost,
       finalPrice,
       netIncome,
     });
 
-    const newCode = Math.floor(Math.random() * 999) + 101;
+    let newCode = 0;
+    do {
+      const code = Math.floor(Math.random() * 999) + 101;
 
-    activity.cost = newCode;
+      if (await Activities.findOne({ code })) return;
+      newCode = code;
+    } while (newCode === 0);
+
+    activity.code = newCode;
 
     await activity.save();
     res.status(201).json({
@@ -65,18 +69,12 @@ export const cancelActivityControllers = async (
       return;
     }
 
-    if (code !== activity.code) {
-      res.status(401).json({
-        msg: "El codigo ingresado no es correcto",
-      });
-      return;
-    }
-
     await Activities.findOneAndUpdate({ code }, { state: false });
 
     res.status(200).json({
       msg: "Actividad cancelada con exito",
     });
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({

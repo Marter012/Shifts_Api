@@ -1,7 +1,6 @@
 import { Model, Schema, model } from "mongoose";
 
 export interface IShifts {
-  category: string;
   date: string;
   schedule: string;
   name: string;
@@ -14,10 +13,6 @@ export interface IShifts {
 }
 
 export const ShiftsSchema = new Schema<IShifts>({
-  category: {
-    type: String,
-    required: true,
-  },
   date: {
     type: String,
     required: true,

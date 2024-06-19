@@ -14,10 +14,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ActivitiesSchema = void 0;
 const mongoose_1 = require("mongoose");
 exports.ActivitiesSchema = new mongoose_1.Schema({
-    category: {
-        type: String,
-        required: true,
-    },
     code: {
         type: Number,
         required: false,

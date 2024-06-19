@@ -3,9 +3,8 @@ import randomstring from "randomstring";
 import Shifts, { IShifts } from "../models/shifts";
 
 export const getShiftsControllers = async (req: Request, res: Response) => {
-  const { category }: IShifts = req.body;
   try {
-    const shifts = await Shifts.find({ category }).exec();
+    const shifts = await Shifts.find().exec();
     if (shifts.length === 0) {
       res.status(404).json({
         msg: "No se encontraron turnos en la base de datos.",
@@ -23,19 +22,10 @@ export const getShiftsControllers = async (req: Request, res: Response) => {
 };
 
 export const addShiftsControllers = async (req: Request, res: Response) => {
-  const {
-    category,
-    date,
-    schedule,
-    name,
-    price,
-    location,
-    phone,
-    activity,
-  }: IShifts = req.body;
+  const { date, schedule, name, price, location, phone, activity }: IShifts =
+    req.body;
 
   const shift = new Shifts({
-    category,
     date,
     schedule,
     name,

@@ -1,7 +1,6 @@
 import { Model, Schema, model } from "mongoose";
 
 export interface IActivities {
-  category: string;
   code: number;
   name: string;
   cost: number;
@@ -11,10 +10,6 @@ export interface IActivities {
 }
 
 export const ActivitiesSchema = new Schema<IActivities>({
-  category: {
-    type: String,
-    required: true,
-  },
   code: {
     type: Number,
     required: false,

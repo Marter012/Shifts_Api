@@ -10,19 +10,11 @@ import {
 
 const router = Router();
 
-router.post(
-  "/getActivities",
-  [
-    check("category", "Error al recibir categoria.").not().isEmpty(),
-    collectErrors,
-  ],
-  getActivitiesControllers
-);
+router.get("/getActivities", getActivitiesControllers);
 
 router.post(
   "/addActivity",
   [
-    check("category", "Error al recibir categoria.").not().isEmpty(),
     check("name", "El nombre es obligatorio.").not().isEmpty(),
     check("cost", "El costo es obligatorio.").not().isEmpty(),
     check("finalPrice", "El precio final es obligatorio.").not().isEmpty(),
@@ -49,7 +41,6 @@ router.post(
     check("code", "Error al recibir el codigo de identificacion.")
       .not()
       .isEmpty(),
-    check("category", "Error al recibir categoria.").not().isEmpty(),
     check("name", "El nombre es obligatorio.").not().isEmpty(),
     check("cost", "El costo es obligatorio.").not().isEmpty(),
     check("finalPrice", "El precio final es obligatorio.").not().isEmpty(),

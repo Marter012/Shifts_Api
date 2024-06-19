@@ -15,9 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateActivityControllers = exports.cancelActivityControllers = exports.addActivityControllers = exports.getActivitiesControllers = void 0;
 const activities_1 = __importDefault(require("../models/activities"));
 const getActivitiesControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { category } = req.body;
     try {
-        const activities = yield activities_1.default.find({ category }).exec();
+        const activities = yield activities_1.default.find().exec();
         if (activities.length === 0) {
             res.status(404).json({
                 msg: "No se encontraron actividades en la base de datos.",
@@ -36,18 +35,22 @@ const getActivitiesControllers = (req, res) => __awaiter(void 0, void 0, void 0,
 });
 exports.getActivitiesControllers = getActivitiesControllers;
 const addActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { category, name, cost, finalPrice, netIncome } = req.body;
+    const { name, cost, finalPrice, netIncome } = req.body;
     try {
         const activity = new activities_1.default({
-            category,
-            code: 0,
             name,
             cost,
             finalPrice,
             netIncome,
         });
-        const newCode = Math.floor(Math.random() * 999) + 101;
-        activity.cost = newCode;
+        let newCode = 0;
+        do {
+            const code = Math.floor(Math.random() * 999) + 101;
+            if (yield activities_1.default.findOne({ code }))
+                return;
+            newCode = code;
+        } while (newCode === 0);
+        activity.code = newCode;
         yield activity.save();
         res.status(201).json({
             activity,
@@ -67,12 +70,6 @@ const cancelActivityControllers = (req, res) => __awaiter(void 0, void 0, void 0
         if (!activity) {
             res.status(404).json({
                 msg: "No se encontro la actividad en la base de datos.",
-            });
-            return;
-        }
-        if (code !== activity.code) {
-            res.status(401).json({
-                msg: "El codigo ingresado no es correcto",
             });
             return;
         }

@@ -14,10 +14,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShiftsSchema = void 0;
 const mongoose_1 = require("mongoose");
 exports.ShiftsSchema = new mongoose_1.Schema({
-    category: {
-        type: String,
-        required: true,
-    },
     date: {
         type: String,
         required: true,
